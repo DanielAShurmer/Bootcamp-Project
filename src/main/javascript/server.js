@@ -25,7 +25,7 @@ mongoose.connect('mongodb://localhost:27017/Test', {
 
 // define a simple route
 app.get('/', (req, res) => {
-    res.json({"message": "You are now connected to Bug Tracker application."});
+    res.json({"message": "You are now connected to the Bug Tracker application."});
 });
 
 // Require Notes routes
