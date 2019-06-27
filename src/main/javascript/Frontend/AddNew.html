@@ -12,7 +12,9 @@
         <h1 class="pageTitle">Add A New Bug</h1>
     </div>
     <div class="pageBody">
-        <div class="bugIdentificationNumber"></div>
+        <div class="bugIdentificationNumber">
+            <h2>Bug ID Number</h2>
+        </div>
         <form class="js_add_form" onsubmit="return addNew(this)">
 
             <div class="form-group">
@@ -25,28 +27,28 @@
                 <p>Priority:</p>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" id="js_priority_low" name="priorityRadioOptions"
-                        value="low" checked>
+                        value="Low" tabindex="2" checked>
                     <label class="form-check-label">
                         Low
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" id="js_priority_medium" name="priorityRadioOptions"
-                        value="medium">
+                        value="Medium" tabindex="3">
                     <label class="form-check-label">
                         Medium
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" id="js_priority_high" name="priorityRadioOptions"
-                        value="high">
+                        value="High" tabindex="4">
                     <label class="form-check-label">
                         High
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" id="js_priority_critical" name="priorityRadioOptions"
-                        value="critical">
+                        value="Critical" tabindex="5">
                     <label class="form-check-label">
                         Critical
                     </label>
@@ -56,21 +58,21 @@
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="js_tag_one">Tag One</label>
-                    <select class="form-control" id="js_tag_one">
+                    <select class="form-control" id="js_tag_one" tabindex="6">
                         <option>-</option>
                     </select>
                 </div>
 
                 <div class="form-group col-md-4">
                     <label for="js_tag_two">Tag Two</label>
-                    <select class="form-control" id="js_tag_two">
+                    <select class="form-control" id="js_tag_two" tabindex="7">
                         <option>-</option>
                     </select>
                 </div>
 
                 <div class="form-group col-md-4">
                     <label for="js_tag_three">Tag Three</label>
-                    <select class="form-control" id="js_tag_three">
+                    <select class="form-control" id="js_tag_three" tabindex="8">
                         <option>-</option>
                     </select>
                 </div>
@@ -78,14 +80,14 @@
 
             <div class="form-group">
                 <p>Image Link:</p>
-                <textarea class="form-control" id="js_add_description" tabindex="1" rows="1"
-                    placeholder="Paste A Link To A Screenshot Showing The Bug Here, If You Have One"
-                    required></textarea>
+                <textarea class="form-control" id="js_add_description" rows="1" tabindex="9"
+                    placeholder="Paste A Link To A Screenshot Showing The Bug Here, If You Have One"></textarea>
             </div>
 
 
-            <button type="submit" class="btn btn-primary">Sumbit Bug Report</button>
-            <button type="button" class="btn btn-secondary" onclick="return swapToDisplayAll()">Cancel</button>
+            <button type="submit" class="btn btn-primary" tabindex="10">Submit Bug Report</button>
+            <button type="button" class="btn btn-secondary" tabindex="11"
+                onclick="return swapToDisplayAll()">Cancel</button>
         </form>
     </div>
     <script src="Scripts/addNew.js"></script>

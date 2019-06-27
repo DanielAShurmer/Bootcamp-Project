@@ -3,7 +3,7 @@ const Bug = require('../models/bug.model.js');
 exports.create = (req, res) => {
 
     const bug = new Bug({
-        bugNumber: req.body.bugNumber || "Unassigned",
+        bugNumber: req.body.bugNumber || 0,
         description: req.body.description || "No Description Given",
         status: req.body.status || "Open",
         priority: req.body.priority || "Low",
@@ -65,7 +65,7 @@ exports.update = (req, res) => {
     }
 
     Bug.findByIdAndUpdate(req.params.bugId, {
-        bugNumber: req.body.bugNumber || "Unassigned",
+        bugNumber: req.body.bugNumber || 0,
         description: req.body.description || "No Description Given",
         status: req.body.status || "Open",
         priority: req.body.priority || "Low",
