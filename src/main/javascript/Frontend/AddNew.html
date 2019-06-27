@@ -9,9 +9,28 @@
 
 <body onload="loadAPI()">
     <div class="pageHeader">
-        <h1 class="pageTitle">Add A New Bug</h1>
+        <nav class="navbar navbar-light bg-light fixed-top">
+            <div class="container">
+                <div class="row">
+                    <h1 class="navbar-brand" href="#">Bug Tracker</h1>
+                </div>
+
+                <div class="row">
+                    <span class="navbar-nav">
+                        <button class="nav-item nav-link btn btn-light navbar-button" onclick="return swapToSearch()">Search Bugs</button>
+                    </span>
+                    <span class="navbar-nav">
+                        <button class="nav-item nav-link btn btn-light navbar-button" onclick="return swapToAddNew()">Add A Bug</button>
+                    </span>
+                    <span class="navbar-nav">
+                        <button class="nav-item nav-link btn btn-light navbar-button" onclick="return swapToDisplayAll()">Site Info</button>
+                    </span>
+                </div>
+            </div>
+        </nav>
     </div>
     <div class="pageBody">
+        <h1 class="pageTitle">Add A New Bug</h1>
         <div id="js_bug_ID_display">
             <p id="js_bug_ID_placeholder">Bug ID Number: Generating New ID...</p>
         </div>

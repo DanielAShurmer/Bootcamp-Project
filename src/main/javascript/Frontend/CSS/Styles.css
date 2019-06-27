@@ -9,3 +9,15 @@ body {
     padding: 10px 50px;
 }
 
+.navbar-button {
+  background-color: rgb(208, 209, 210);
+  margin: 5px 5px;
+}
+
+.pageBody {
+  padding: 60px 0px 0px 0px;
+}
+
+.pageTitle {
+  font-size: 30px;
+}

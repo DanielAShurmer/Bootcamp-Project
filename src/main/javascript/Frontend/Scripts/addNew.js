@@ -1,7 +1,15 @@
 let bugIDNumber = 0;
 let BugData = [];
 
-function swapToDisplayAll() {
+function swapToSearch() {
+    window.location = "DisplayAll.html";
+}
+
+function swapToAddNew() {
+    window.location = "AddNew.html";
+}
+
+function swapToInfo() {
     window.location = "displayAll.html";
 }
 
