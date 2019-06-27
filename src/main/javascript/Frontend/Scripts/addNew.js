@@ -1,7 +1,44 @@
 let bugIDNumber = 0;
+let BugData = [];
 
 function swapToDisplayAll() {
     window.location = "displayAll.html";
+}
+
+function generateNewBugID() {
+    let validIDFound = false;
+    let proposedNewID = 0;
+    let uniqueIDGenerationAttempt = 1;
+    while (validIDFound == false) {
+        proposedNewID = Math.floor(Math.random() * 100000);
+        validIDFound = true;
+        console.log("Attempt " + uniqueIDGenerationAttempt + " | Attempting The New ID " + proposedNewID);
+
+        for (let SingleBugReport in BugData) {
+            SingleBugReport = BugData[SingleBugReport];
+            console.log(SingleBugReport["bugNumber"]);
+            if (SingleBugReport["bugNumber"] == proposedNewID){
+                validIDFound = false;
+            }
+        }
+        uniqueIDGenerationAttempt++;
+        if (uniqueIDGenerationAttempt == 10000) {break};
+    }
+
+    if (validIDFound == true) {
+        bugIDNumber = proposedNewID;
+        console.log(bugIDNumber);
+        document.getElementById("js_bug_ID_display").removeChild(document.getElementById("js_bug_ID_placeholder"));
+        let thisDetail = document.createElement("p");
+        thisDetail.innerText = "Bug ID Number: " + bugIDNumber;
+        document.getElementById("js_bug_ID_display").appendChild(thisDetail);
+    }
+    else {
+        document.getElementById("js_bug_ID_display").removeChild(document.getElementById("js_bug_ID_placeholder"));
+        let thisDetail = document.createElement("p");
+        thisDetail.innerText = "Error: No Unique Bug ID Could Be Found After 10,000 Attempts, Please Contact The System Administrator";
+        document.getElementById("js_error_display").appendChild(thisDetail);
+    }
 }
 
 function addNew(formData) {
@@ -44,14 +81,14 @@ function loadAPI() {
     DataRequest.onload = function () {
         console.log("Data Received!");
         BugData = JSON.parse(DataRequest.responseText);
-        console.log(BugData);
+        generateNewBugID();
     }
 
     DataRequest.onerror = function () {
         let thisDetail = document.createElement("p");
         thisDetail.className = "errorMessage";
         thisDetail.innerText = "Oops! The server seems to be down.";
-        document.getElementById("js_bug_details").appendChild(thisDetail);
+        document.getElementById("js_error_display").appendChild(thisDetail);
     }
 
     DataRequest.open("GET", "http://localhost:3000/bugs");

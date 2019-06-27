@@ -12,9 +12,10 @@
         <h1 class="pageTitle">Add A New Bug</h1>
     </div>
     <div class="pageBody">
-        <div class="bugIdentificationNumber">
-            <h2>Bug ID Number</h2>
+        <div id="js_bug_ID_display">
+            <p id="js_bug_ID_placeholder">Bug ID Number: Generating New ID...</p>
         </div>
+        <div id="js_error_display"></div>
         <form class="js_add_form" onsubmit="return addNew(this)">
 
             <div class="form-group">
