@@ -1,8 +1,7 @@
 let BugData = {};
 
 function cleanString(inputString) {
-    // Function Splits Strings Into Words Based On Capitals, Then Ensures Each Word Starts With
-    // A Capital Letter (e.g. 'thisSetOfWords' to 'This Set Of Words')
+    inputString = inputString.replace(/_/g, "");
     let SplitString = [];
     SplitString = (inputString).split(/([A-Z])/g);
     inputString = "";
@@ -24,21 +23,19 @@ function updateDetails() {
         for (let element in BugData[data]) {
             console.log(ThisBug[element]);
 
-            if (element != "__v"){
+            if (element != "__v") {
 
                 let thisDetail = document.createElement("p");
                 thisDetail.className = "bugDetail";
-                thisDetail.innerText = element;
+                thisDetail.innerText = cleanString(element);
                 thisDetail.innerText += ": ";
                 thisDetail.innerText += ThisBug[element];
-        
-                thisDetail.innerText = cleanString(thisDetail.innerText);
-        
+
                 document.getElementById("js_bug_details").appendChild(thisDetail);
             }
 
         }
-      
+
     }
 
 }
@@ -54,6 +51,13 @@ function loadAPI() {
         updateDetails();
     }
 
-    DataRequest.open("GET", "http://localhost:3000/notes");
+    DataRequest.onerror = function () {
+        let thisDetail = document.createElement("p");
+        thisDetail.className = "errorMessage";
+        thisDetail.innerText = "Oops! The server seems to be down.";
+        document.getElementById("js_bug_details").appendChild(thisDetail);
+    }
+
+    DataRequest.open("GET", "http://localhost:3000/bugs");
     DataRequest.send();
 }
