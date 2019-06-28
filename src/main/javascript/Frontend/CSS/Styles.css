@@ -25,3 +25,12 @@ body {
 .pageTitle {
   font-size: 30px;
 }
+
+.searchPanel {
+  background-color: rgb(208, 209, 210);
+  margin: -5px 0px -10px;
+}
+
+.searchContainer {
+  position: fixed;
+}
