@@ -41,10 +41,16 @@ function updateDetails() {
         let ThisBug = BugData[data];
 
         let bugContainer = document.createElement("button");
-        bugContainer.className = "bugContainer";
+        bugContainer.className = "searchBugContainer container";
 
         let bugContainerDisplay = document.createElement("div");
-        bugContainerDisplay.className = "bugContainerDisplay";
+        bugContainerDisplay.className = "bugContainerDisplay row";
+
+        let bugContainerDisplayNumAndDesc = document.createElement("div");
+        bugContainerDisplayNumAndDesc.className = "bugContainerDisplayNumAndDesc col";
+
+        let bugContainerDisplayStat = document.createElement("div");
+        bugContainerDisplayStat.className = "bugContainerDisplayStat col";
 
         for (let element in ThisBug) {
 
@@ -52,23 +58,40 @@ function updateDetails() {
                 let thisDetail = document.createElement("h1");
                 thisDetail.className = "bugContainerHeading";
                 thisDetail.innerText = "ID: " + ThisBug[element];
-                bugContainerDisplay.appendChild(thisDetail);
+                bugContainerDisplayNumAndDesc.appendChild(thisDetail);
             }
 
             if (element == "description") {
                 let thisDetail = document.createElement("p");
                 thisDetail.className = "bugContainerDescription";
                 thisDetail.innerText = ThisBug[element];
-                bugContainerDisplay.appendChild(thisDetail);
+                bugContainerDisplayNumAndDesc.appendChild(thisDetail);
             }
 
             if (element == "status") {
                 let thisDetail = document.createElement("p");
-                thisDetail.className = "bugContainerDescription";
+                thisDetail.className = "bugContainerStatus";
                 thisDetail.innerText = ThisBug[element];
-                bugContainerDisplay.appendChild(thisDetail);
+
+                if (ThisBug[element] == "Open") {
+                    bugContainerDisplayStat.style.cssText = "background-color: red;"
+                }
+                else if (ThisBug[element] == "Closed") {
+                    bugContainerDisplayStat.style.cssText = "background-color: green;"
+                }
+                else if (ThisBug[element] == "Being Worked On") {
+                    bugContainerDisplayStat.style.cssText = "background-color: orange;"
+                }
+                else if (ThisBug[element] == "Reopened") {
+                    bugContainerDisplayStat.style.cssText = "background-color: yellow;"
+                }
+
+                bugContainerDisplayStat.appendChild(thisDetail);
             }
         }
+        bugContainerDisplay.appendChild(bugContainerDisplayNumAndDesc);
+        bugContainerDisplay.appendChild(bugContainerDisplayStat);
+
         bugContainer.addEventListener("click", function () { goToBugWithID(ThisBug["_id"])});
         bugContainer.appendChild(bugContainerDisplay);
         document.getElementById("js_bug_details").appendChild(bugContainer);

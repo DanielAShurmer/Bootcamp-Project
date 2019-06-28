@@ -34,3 +34,28 @@ body {
 .searchContainer {
   position: fixed;
 }
+
+.searchBugContainer {
+  background-color: rgb(208, 209, 210);
+  border: 2px solid rgb(248, 249, 250);
+  width: 100%;
+  margin: 10px 0px;
+  border-radius: 12px;
+}
+
+.bugContainerDisplayNumAndDesc {
+  min-width: 70%;
+}
+
+.bugContainerDisplayStat {
+  height: 100%;
+  border: 2px solid rgb(248, 249, 250);
+  border-radius: 12px;
+  padding: 10px;
+  margin: 5px;
+}
+
+.bugContainerStatus {
+  font-size: 1.25em;
+}
+
