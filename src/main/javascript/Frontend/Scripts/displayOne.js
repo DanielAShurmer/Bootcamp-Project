@@ -29,50 +29,29 @@ function cleanString(inputString) {
     return inputString;
 }
 
-function goToBugWithID(bugID) {
-    sessionStorage.setItem("IDToLoad",bugID);
-    window.location = "DisplayOne.html";
-    console.log("Loading Data Of Bug With Identifier " + bugID);
-}
-
 function updateDetails() {
     for (let data in BugData) {
         let ThisBug = BugData[data];
+        for (let element in BugData[data]) {
+            console.log(ThisBug[element]);
 
-        let bugContainer = document.createElement("button");
-        bugContainer.className = "bugContainer";
+            if (element != "__v") {
 
-        let bugContainerDisplay = document.createElement("div");
-        bugContainerDisplay.className = "bugContainerDisplay";
-
-        for (let element in ThisBug) {
-
-            if (element == "bugNumber") {
-                let thisDetail = document.createElement("h1");
-                thisDetail.className = "bugContainerHeading";
-                thisDetail.innerText = "ID: " + ThisBug[element];
-                bugContainerDisplay.appendChild(thisDetail);
-            }
-
-            if (element == "description") {
                 let thisDetail = document.createElement("p");
-                thisDetail.className = "bugContainerDescription";
-                thisDetail.innerText = ThisBug[element];
-                bugContainerDisplay.appendChild(thisDetail);
+                thisDetail.className = "bugDetail";
+                thisDetail.innerText = cleanString(element);
+                thisDetail.innerText += ": ";
+                thisDetail.innerText += ThisBug[element];
+
+                document.getElementById("js_bug_details").appendChild(thisDetail);
             }
 
-            if (element == "status") {
-                let thisDetail = document.createElement("p");
-                thisDetail.className = "bugContainerDescription";
-                thisDetail.innerText = ThisBug[element];
-                bugContainerDisplay.appendChild(thisDetail);
-            }
         }
-        bugContainer.addEventListener("click", function () { goToBugWithID(ThisBug["_id"])});
-        bugContainer.appendChild(bugContainerDisplay);
-        document.getElementById("js_bug_details").appendChild(bugContainer);
+
     }
+
 }
+
 
 function loadAPI() {
     const DataRequest = new XMLHttpRequest();
