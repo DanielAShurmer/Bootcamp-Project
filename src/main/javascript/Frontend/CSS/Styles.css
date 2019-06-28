@@ -59,3 +59,15 @@ body {
   font-size: 1.25em;
 }
 
+.filterInput {
+  width: 100%;
+}
+
+.searchContainer {
+  max-width: 130px;
+}
+
+.filterButton {
+  width: 100%;
+}
+

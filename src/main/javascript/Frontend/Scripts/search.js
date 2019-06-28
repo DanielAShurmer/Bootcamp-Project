@@ -12,6 +12,10 @@ function swapToInfo() {
     window.location = "displayAll.html";
 }
 
+function runSearch() {
+    // ---------TODO-----------
+}
+
 function cleanString(inputString) {
     inputString = inputString.replace(/_/g, "");
     let SplitString = [];

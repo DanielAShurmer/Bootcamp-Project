@@ -39,7 +39,27 @@
             <div class="searchPanel col col-lg-2">
                 <div class="searchContainer">
                     <h1 class="searchPanelHeading"> Filters </h1>
-                    --------------------------
+                    <form class="js_add_form" onsubmit="return runSearch(this)">
+
+                        <div class="form-group">
+                            <p>ID:</p>
+                            <input type="number" name="js_form_ID" class="filterInput">
+                        </div>
+
+                        <div class="form-group">
+                                <p>Tag:</p>
+                                <input type="text" name="js_form_tag" class="filterInput">
+                        </div>
+
+                        <div class="form-group">
+                                <p>Status:</p>
+                                <input type="text" name="js_form_status" class="filterInput">
+                        </div>
+
+                        <button class="btn btn-dark filterButton">Filter</button>
+
+
+                    </form>
                 </div>
             </div>
 
