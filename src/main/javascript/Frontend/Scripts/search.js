@@ -30,6 +30,7 @@ function cleanString(inputString) {
 }
 
 function goToBugWithID(bugID) {
+    sessionStorage.removeItem("IDToLoad");
     sessionStorage.setItem("IDToLoad",bugID);
     window.location = "DisplayOne.html";
     console.log("Loading Data Of Bug With Identifier " + bugID);

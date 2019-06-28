@@ -30,22 +30,18 @@ function cleanString(inputString) {
 }
 
 function updateDetails() {
-    for (let data in BugData) {
-        let ThisBug = BugData[data];
-        for (let element in BugData[data]) {
-            console.log(ThisBug[element]);
+    for (let element in BugData) {
+        console.log(BugData[element]);
 
-            if (element != "__v") {
+        if (element != "__v") {
 
-                let thisDetail = document.createElement("p");
-                thisDetail.className = "bugDetail";
-                thisDetail.innerText = cleanString(element);
-                thisDetail.innerText += ": ";
-                thisDetail.innerText += ThisBug[element];
+            let thisDetail = document.createElement("p");
+            thisDetail.className = "bugDetail";
+            thisDetail.innerText = cleanString(element);
+            thisDetail.innerText += ": ";
+            thisDetail.innerText += BugData[element];
 
-                document.getElementById("js_bug_details").appendChild(thisDetail);
-            }
-
+            document.getElementById("js_bug_details").appendChild(thisDetail);
         }
 
     }
@@ -53,23 +49,36 @@ function updateDetails() {
 }
 
 
+
+
 function loadAPI() {
-    const DataRequest = new XMLHttpRequest();
+    loadIDNumber = sessionStorage.getItem("IDToLoad");
+    console.log("Loading Bug With ID Number: " + loadIDNumber);
 
-    DataRequest.onload = function () {
-        console.log("Data Received!");
-        BugData = JSON.parse(DataRequest.responseText);
-        console.log(BugData);
-        updateDetails();
+    if (loadIDNumber != null) {
+        const DataRequest = new XMLHttpRequest();
+
+        DataRequest.onload = function () {
+            console.log("Data Received!");
+            BugData = JSON.parse(DataRequest.responseText);
+            console.log(BugData);
+            updateDetails();
+        }
+
+        DataRequest.onerror = function () {
+            let thisDetail = document.createElement("p");
+            thisDetail.className = "errorMessage";
+            thisDetail.innerText = "Oops! The server seems to be down.";
+            document.getElementById("js_bug_details").appendChild(thisDetail);
+        }
+
+        DataRequest.open("GET", "http://localhost:3000/bugs/" + loadIDNumber);
+        DataRequest.send();
     }
-
-    DataRequest.onerror = function () {
+    else {
         let thisDetail = document.createElement("p");
-        thisDetail.className = "errorMessage";
-        thisDetail.innerText = "Oops! The server seems to be down.";
-        document.getElementById("js_bug_details").appendChild(thisDetail);
+            thisDetail.className = "errorMessage";
+            thisDetail.innerText = "No bug has been selected to load.";
+            document.getElementById("js_bug_details").appendChild(thisDetail);
     }
-
-    DataRequest.open("GET", "http://localhost:3000/bugs");
-    DataRequest.send();
 }
