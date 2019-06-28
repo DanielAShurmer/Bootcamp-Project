@@ -3,7 +3,7 @@ let BugData = [];
 const TAGLIST = ['User Interface','AI','Graphical','Crashes Program','Ability'];
 
 function swapToSearch() {
-    window.location = "DisplayAll.html";
+    window.location = "Search.html";
 }
 
 function swapToAddNew() {
@@ -88,7 +88,7 @@ function addNew(formData) {
 
     InputDataRequest.onloadend = function () {
         console.log("Bug Report Successfully Added!");
-        swapToDisplayAll();
+        swapToSearch();
     }
 
     InputDataRequest.open("POST", "http://localhost:3000/bugs");

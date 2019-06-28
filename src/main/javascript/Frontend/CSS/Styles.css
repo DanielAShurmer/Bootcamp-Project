@@ -9,6 +9,10 @@ body {
     padding: 10px 50px;
 }
 
+.bugContainer {
+  background-color: rgb(208, 209, 210);
+}
+
 .navbar-button {
   background-color: rgb(208, 209, 210);
   margin: 5px 5px;

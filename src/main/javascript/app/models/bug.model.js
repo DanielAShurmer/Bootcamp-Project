@@ -10,7 +10,7 @@ const BugSchema = mongoose.Schema({
     tagThree: String,
     image: String,
     closeReason: String,
-    openTeason: String
+    openReason: String
 });
 
 module.exports = mongoose.model('Bug', BugSchema);

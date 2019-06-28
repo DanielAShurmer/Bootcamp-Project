@@ -32,10 +32,14 @@ function cleanString(inputString) {
 function updateDetails() {
     for (let data in BugData) {
         let ThisBug = BugData[data];
+
+        let bugContainer = document.createElement("div");
+        bugContainer.className = "bugContainer";
+
         for (let element in BugData[data]) {
             console.log(ThisBug[element]);
 
-            if (element != "__v") {
+            if (element != "__v" && element != "_id") {
 
                 let thisDetail = document.createElement("p");
                 thisDetail.className = "bugDetail";
@@ -43,10 +47,11 @@ function updateDetails() {
                 thisDetail.innerText += ": ";
                 thisDetail.innerText += ThisBug[element];
 
-                document.getElementById("js_bug_details").appendChild(thisDetail);
+                bugContainer.appendChild(thisDetail);
             }
-
         }
+
+        document.getElementById("js_bug_details").appendChild(bugContainer);
 
     }
 
