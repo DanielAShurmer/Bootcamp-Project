@@ -1,5 +1,6 @@
 let bugIDNumber = 0;
 let BugData = [];
+const TAGLIST = ['User Interface','AI','Graphical','Crashes Program','Ability'];
 
 function swapToSearch() {
     window.location = "DisplayAll.html";
@@ -13,6 +14,22 @@ function swapToInfo() {
     window.location = "displayAll.html";
 }
 
+function loadTagLists() {
+    for (let tag in TAGLIST) {
+        tag = TAGLIST[tag];
+        console.log("Adding tag '" + tag + "' to taglist");
+        let thisTag = document.createElement("option");
+        thisTag.text = tag;
+        document.getElementById("js_tag_one").add(thisTag);
+        thisTag = document.createElement("option");
+        thisTag.text = tag;
+        document.getElementById("js_tag_two").add(thisTag);
+        thisTag = document.createElement("option");
+        thisTag.text = tag;
+        document.getElementById("js_tag_three").add(thisTag);
+    }
+}
+
 function generateNewBugID() {
     let validIDFound = false;
     let proposedNewID = 0;
@@ -20,11 +37,10 @@ function generateNewBugID() {
     while (validIDFound == false) {
         proposedNewID = Math.floor(Math.random() * 100000);
         validIDFound = true;
-        console.log("Attempt " + uniqueIDGenerationAttempt + " | Attempting The New ID " + proposedNewID);
+        console.log("Unique ID Generation Attempt " + uniqueIDGenerationAttempt + " | Attempting The New ID " + proposedNewID);
 
         for (let SingleBugReport in BugData) {
             SingleBugReport = BugData[SingleBugReport];
-            console.log(SingleBugReport["bugNumber"]);
             if (SingleBugReport["bugNumber"] == proposedNewID){
                 validIDFound = false;
             }
@@ -35,7 +51,6 @@ function generateNewBugID() {
 
     if (validIDFound == true) {
         bugIDNumber = proposedNewID;
-        console.log(bugIDNumber);
         document.getElementById("js_bug_ID_display").removeChild(document.getElementById("js_bug_ID_placeholder"));
         let thisDetail = document.createElement("p");
         thisDetail.innerText = "Bug ID Number: " + bugIDNumber;
@@ -90,6 +105,7 @@ function loadAPI() {
         console.log("Data Received!");
         BugData = JSON.parse(DataRequest.responseText);
         generateNewBugID();
+        loadTagLists();
     }
 
     DataRequest.onerror = function () {
