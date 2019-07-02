@@ -1,6 +1,6 @@
 * {
     box-sizing: border-box;
-  }
+}
 
 body {
     background-color: rgb(202, 227, 248);
@@ -76,3 +76,26 @@ body {
   width: 100%;
 }
 
+.singleBugContainerDisplay {
+  background-color: rgb(208, 209, 210);
+  border: 2px solid rgb(248, 249, 250);
+}
+
+.singleBugContainerDisplaySideStatus {
+  min-height: 15%;
+  border: 2px solid rgb(248, 249, 250);
+  border-radius: 12px;
+  padding: 10px;
+  margin: 5px;
+  text-align: center;
+  font-size: 160%;
+}
+
+.singleBugContainerDisplaySideOthers {
+  min-height: 50%;
+  background-color: rgb(182, 182, 182);
+  border: 2px solid rgb(248, 249, 250);
+  text-align: right;
+  padding: 10px;
+  margin: 5px;
+}

@@ -30,26 +30,116 @@ function cleanString(inputString) {
 }
 
 function updateDetails() {
+
+    let bugContainerDisplay = document.createElement("div");
+    bugContainerDisplay.className = "singleBugContainerDisplay row";
+
+    let bugContainerDisplayMain = document.createElement("div");
+    bugContainerDisplayMain.className = "singleBugContainerDisplayMain col";
+
+    let bugContainerDisplaySideColumn = document.createElement("div");
+    bugContainerDisplaySideColumn.className = "singleBugContainerDisplaySideColumn col";
+
+    let bugContainerDisplaySideStatus = document.createElement("div");
+    bugContainerDisplaySideStatus.className = "singleBugContainerDisplaySideStatus col";
+
+    let bugContainerDisplaySideOthers = document.createElement("div");
+    bugContainerDisplaySideOthers.className = "singleBugContainerDisplaySideOthers col";
+
     for (let element in BugData) {
-        console.log(BugData[element]);
 
-        if (element != "__v") {
-
-            let thisDetail = document.createElement("p");
-            thisDetail.className = "bugDetail";
-            thisDetail.innerText = cleanString(element);
-            thisDetail.innerText += ": ";
-            thisDetail.innerText += BugData[element];
-
-            document.getElementById("js_bug_details").appendChild(thisDetail);
+        if (element == "bugNumber") {
+            let thisDetail = document.createElement("h1");
+            thisDetail.className = "bugContainerHeading";
+            thisDetail.innerText = "ID: " + BugData[element];
+            bugContainerDisplayMain.appendChild(thisDetail);
         }
 
+        if (element == "description") {
+            let thisDetail = document.createElement("p");
+            thisDetail.className = "bugContainerDescription";
+            thisDetail.innerText = "Description: \n" + BugData[element];
+            bugContainerDisplayMain.appendChild(thisDetail);
+        }
+
+        if (element == "image") {
+            let thisDetail = document.createElement("p");
+            thisDetail.className = "bugContainerImage";
+            thisDetail.innerText = "Image: \n" + BugData[element];
+            bugContainerDisplayMain.appendChild(thisDetail);
+        }
+
+        if (element == "closeReason") {
+            let thisDetail = document.createElement("p");
+            thisDetail.className = "bugContainerCloseReason";
+            thisDetail.innerText = "Reason For Closing: \n" + BugData[element];
+            bugContainerDisplayMain.appendChild(thisDetail);
+        }
+
+        if (element == "openReason") {
+            let thisDetail = document.createElement("p");
+            thisDetail.className = "bugContainerOpenReason";
+            thisDetail.innerText = "Reason For Reopening: \n" + BugData[element];
+            bugContainerDisplayMain.appendChild(thisDetail);
+        }
+
+        if (element == "status") {
+            let thisDetail = document.createElement("p");
+            thisDetail.className = "bugContainerStatus";
+            thisDetail.innerText = BugData[element];
+
+            if (BugData[element] == "Open") {
+                bugContainerDisplaySideStatus.style.cssText = "background-color: red;"
+            }
+            else if (BugData[element] == "Closed") {
+                bugContainerDisplaySideStatus.style.cssText = "background-color: green;"
+            }
+            else if (BugData[element] == "Being Worked On") {
+                bugContainerDisplaySideStatus.style.cssText = "background-color: orange;"
+            }
+            else if (BugData[element] == "Reopened") {
+                bugContainerDisplaySideStatus.style.cssText = "background-color: yellow;"
+            }
+
+            bugContainerDisplaySideStatus.appendChild(thisDetail);
+        }
+
+        if (element == "priority") {
+            let thisDetail = document.createElement("p");
+            thisDetail.className = "bugContainerPriority";
+            thisDetail.innerText = "Priority: \n" + BugData[element];
+            bugContainerDisplaySideOthers.appendChild(thisDetail);
+        }
+
+        if (element == "tagOne") {
+            let thisDetail = document.createElement("p");
+            thisDetail.className = "bugContainerTagOne";
+            thisDetail.innerText = "Tags: \n" + BugData[element];
+            bugContainerDisplaySideOthers.appendChild(thisDetail);
+        }
+
+        if (element == "tagTwo") {
+            let thisDetail = document.createElement("p");
+            thisDetail.className = "bugContainerTagTwo";
+            thisDetail.innerText = BugData[element];
+            bugContainerDisplaySideOthers.appendChild(thisDetail);
+        }
+
+        if (element == "tagThree") {
+            let thisDetail = document.createElement("p");
+            thisDetail.className = "bugContainerTagThree";
+            thisDetail.innerText = BugData[element];
+            bugContainerDisplaySideOthers.appendChild(thisDetail);
+        }
     }
+    bugContainerDisplaySideColumn.appendChild(bugContainerDisplaySideStatus);
+    bugContainerDisplaySideColumn.appendChild(bugContainerDisplaySideOthers);
+    bugContainerDisplay.appendChild(bugContainerDisplayMain);
+    bugContainerDisplay.appendChild(bugContainerDisplaySideColumn);
+
+    document.getElementById("js_bug_details").appendChild(bugContainerDisplay);
 
 }
-
-
-
 
 function loadAPI() {
     loadIDNumber = sessionStorage.getItem("IDToLoad");
@@ -77,8 +167,8 @@ function loadAPI() {
     }
     else {
         let thisDetail = document.createElement("p");
-            thisDetail.className = "errorMessage";
-            thisDetail.innerText = "No bug has been selected to load.";
-            document.getElementById("js_bug_details").appendChild(thisDetail);
+        thisDetail.className = "errorMessage";
+        thisDetail.innerText = "No bug has been selected to load.";
+        document.getElementById("js_bug_details").appendChild(thisDetail);
     }
 }
