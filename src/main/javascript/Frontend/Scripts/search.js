@@ -31,6 +31,17 @@ function runSearch(formData) {
     if (formData[0].value != "") {
         FilteredData = filter(FilteredData, "bugNumber", formData[0].value);
     }
+    if (formData[1].value != "") {
+        let TagOneList = filter(FilteredData, "tagOne", cleanString((formData[1].value).toLowerCase()));
+        let TagTwoList = filter(FilteredData, "tagTwo", cleanString((formData[1].value).toLowerCase()));
+        let TagThreeList = filter(FilteredData, "tagThree", cleanString((formData[1].value).toLowerCase()));
+
+        FilteredData = [];
+        for (let match in TagOneList) { FilteredData[FilteredData.length] = TagOneList[match]; }
+        for (let match in TagTwoList) { FilteredData[FilteredData.length] = TagTwoList[match]; }
+        for (let match in TagThreeList) { FilteredData[FilteredData.length] = TagThreeList[match]; }
+
+    }
     if (formData[2].value != "") {
         FilteredData = filter(FilteredData, "status", cleanString((formData[2].value).toLowerCase()));
     }
