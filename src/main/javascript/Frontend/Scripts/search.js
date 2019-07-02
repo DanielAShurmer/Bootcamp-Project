@@ -31,9 +31,12 @@ function runSearch(formData) {
     if (formData[0].value != "") {
         FilteredData = filter(FilteredData, "bugNumber", formData[0].value);
     }
+    if (formData[2].value != "") {
+        FilteredData = filter(FilteredData, "status", cleanString((formData[2].value).toLowerCase()));
+    }
     updateDetails(FilteredData);
 
-    return false;
+    return false; 
 }
 
 function cleanString(inputString) {
