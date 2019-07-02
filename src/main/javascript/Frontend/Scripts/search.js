@@ -1,4 +1,5 @@
 let BugData = {};
+let FilteredData = [];
 
 function swapToSearch() {
     window.location = "Search.html";
@@ -12,8 +13,27 @@ function swapToInfo() {
     window.location = "displayAll.html";
 }
 
-function runSearch() {
-    // ---------TODO-----------
+function filter(inputBugs, filteringElement, lookingFor) {
+    let matchingResults = [];
+    for (let data in inputBugs) {
+        let ThisBug = inputBugs[data];
+
+        let found = ThisBug[filteringElement];
+        if (found == lookingFor) {
+            matchingResults[matchingResults.length] = ThisBug;
+        }
+    }
+    return matchingResults;
+}
+
+function runSearch(formData) {
+    FilteredData = BugData;
+    if (formData[0].value != "") {
+        FilteredData = filter(FilteredData, "bugNumber", formData[0].value);
+    }
+    updateDetails(FilteredData);
+
+    return false;
 }
 
 function cleanString(inputString) {
@@ -35,18 +55,31 @@ function cleanString(inputString) {
 
 function goToBugWithID(bugID) {
     sessionStorage.removeItem("IDToLoad");
-    sessionStorage.setItem("IDToLoad",bugID);
+    sessionStorage.setItem("IDToLoad", bugID);
     window.location = "DisplayOne.html";
     console.log("Loading Data Of Bug With Identifier " + bugID);
 }
 
-function updateDetails() {
-    for (let data in BugData) {
-        let ThisBug = BugData[data];
+function updateDetails(inputBugs) {
+
+    try {
+        let Par = document.getElementById("js_bug_details");
+        let Chi = document.getElementById("bugListing");
+        Par.removeChild(Chi);
+    }
+    catch {
+        console.log("Bug Listing Currently Empty")
+    }
+
+    let bugListing = document.createElement("div");
+    bugListing.id = "bugListing";
+
+    for (let data in inputBugs) {
+        let ThisBug = inputBugs[data];
 
         let bugContainer = document.createElement("button");
         bugContainer.className = "searchBugContainer container";
-
+        
         let bugContainerDisplay = document.createElement("div");
         bugContainerDisplay.className = "bugContainerDisplay row";
 
@@ -96,9 +129,10 @@ function updateDetails() {
         bugContainerDisplay.appendChild(bugContainerDisplayNumAndDesc);
         bugContainerDisplay.appendChild(bugContainerDisplayStat);
 
-        bugContainer.addEventListener("click", function () { goToBugWithID(ThisBug["_id"])});
+        bugContainer.addEventListener("click", function () { goToBugWithID(ThisBug["_id"]) });
         bugContainer.appendChild(bugContainerDisplay);
-        document.getElementById("js_bug_details").appendChild(bugContainer);
+        bugListing.appendChild(bugContainer);
+        document.getElementById("js_bug_details").appendChild(bugListing);
     }
 }
 
@@ -109,7 +143,7 @@ function loadAPI() {
         console.log("Data Received!");
         BugData = JSON.parse(DataRequest.responseText);
         console.log(BugData);
-        updateDetails();
+        updateDetails(BugData);
     }
 
     DataRequest.onerror = function () {

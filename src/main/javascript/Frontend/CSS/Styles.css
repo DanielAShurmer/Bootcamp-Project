@@ -29,6 +29,7 @@ body {
 .searchPanel {
   background-color: rgb(208, 209, 210);
   margin: -5px 0px -10px;
+  min-height: 100vh;
 }
 
 .searchContainer {
@@ -64,7 +65,11 @@ body {
 }
 
 .searchContainer {
-  max-width: 130px;
+  max-width: 165px;
+}
+
+.searchPanel {
+  max-width: 200px;
 }
 
 .filterButton {
