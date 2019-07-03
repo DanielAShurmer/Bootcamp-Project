@@ -1,4 +1,6 @@
 let BugData = {};
+const BUGSTATUSOPTIONS = ["Open", "Closed", "Being Worked On", "Reopened"];
+const TAGLIST = ["User Interface", "AI", "Graphical", "Crashes Program", "Ability"];
 
 function swapToSearch() {
     window.location = "Search.html";
@@ -36,7 +38,7 @@ function updateBug(formData) {
     bugToEditDetails["bugNumber"] = BugData["bugNumber"];
     bugToEditDetails["description"] = formData[0].value;
 
-    bugToEditDetails["status"] = BugData["status"];
+    bugToEditDetails["status"] = formData[4].value;
     bugToEditDetails["priority"] = BugData["priority"];
 
     bugToEditDetails["tagOne"] = BugData["tagOne"];
@@ -172,6 +174,27 @@ function updateDetails() {
             }
 
             bugContainerDisplaySideStatus.appendChild(thisDetail);
+
+            thisDetail = document.createElement("p");
+            thisDetail.className = "bugContainerStatusTitle";
+            thisDetail.innerText = "Status:";
+            bugContainerDisplaySideOthers.appendChild(thisDetail);
+
+            thisDetail = document.createElement("select");
+            thisDetail.className = "bugContainerStatusDropdown";
+
+            for (status in BUGSTATUSOPTIONS) {
+                let thisStatus = document.createElement("option");
+                thisStatus.innerText = BUGSTATUSOPTIONS[status];
+
+                if (BUGSTATUSOPTIONS[status] == BugData[element]) {
+                    thisStatus.setAttribute("selected","selected");
+                }
+
+                thisDetail.appendChild(thisStatus);
+            }
+
+            bugContainerDisplaySideOthers.appendChild(thisDetail);
         }
 
         if (element == "priority") {
@@ -230,7 +253,7 @@ function loadAPI() {
             BugData = JSON.parse(DataRequest.responseText);
             console.log(BugData);
 
-            if (BugData["message"] != null){
+            if (BugData["message"] != null) {
                 swapToSearch();
             }
             updateDetails();
