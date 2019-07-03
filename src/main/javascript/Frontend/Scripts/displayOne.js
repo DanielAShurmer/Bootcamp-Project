@@ -29,9 +29,55 @@ function cleanString(inputString) {
     return inputString;
 }
 
+function updateBug(formData) {
+
+    let bugToEditDetails = {};
+    bugToEditDetails["_id"] = BugData["_id"];
+    bugToEditDetails["bugNumber"] = BugData["bugNumber"];
+    bugToEditDetails["description"] = formData[0].value;
+
+    bugToEditDetails["status"] = BugData["status"];
+    bugToEditDetails["priority"] = BugData["priority"];
+
+    bugToEditDetails["tagOne"] = BugData["tagOne"];
+    bugToEditDetails["tagTwo"] = BugData["tagTwo"];
+    bugToEditDetails["tagThree"] = BugData["tagThree"];
+
+    bugToEditDetails["image"] = BugData["image"];
+
+    bugToEditDetails["closeReason"] = BugData["closeReason"];
+    bugToEditDetails["openReason"] = BugData["openReason"];
+    bugToEditDetails["__v"] = BugData["__v"];
+
+    console.log(bugToEditDetails);
+
+    const DeleteDataRequest = new XMLHttpRequest();
+
+    DeleteDataRequest.onloadend = function () {
+
+        const InputDataRequest = new XMLHttpRequest();
+
+        InputDataRequest.onloadend = function () {
+            console.log("Bug Report Successfully Readded!");
+            swapToSearch();
+        }
+
+        InputDataRequest.open("POST", "http://localhost:3000/bugs");
+        InputDataRequest.setRequestHeader("Content-Type", "application/json");
+        InputDataRequest.send(JSON.stringify(bugToEditDetails));
+
+        console.log("Bug Report Successfully Deleted!");
+    }
+
+    DeleteDataRequest.open("DELETE", "http://localhost:3000/bugs/" + BugData["_id"]);
+    DeleteDataRequest.send();
+
+    return true;
+}
+
 function updateDetails() {
 
-    let bugContainerDisplay = document.createElement("div");
+    let bugContainerDisplay = document.createElement("form");
     bugContainerDisplay.className = "singleBugContainerDisplay row";
 
     let bugContainerDisplayMain = document.createElement("div");
@@ -58,7 +104,13 @@ function updateDetails() {
         if (element == "description") {
             let thisDetail = document.createElement("p");
             thisDetail.className = "bugContainerDescription";
-            thisDetail.innerText = "Description: \n" + BugData[element];
+            thisDetail.innerText = "Description:";
+            bugContainerDisplayMain.appendChild(thisDetail);
+
+            thisDetail = document.createElement("textarea");
+            thisDetail.className = "bugContainerDescriptionInput";
+            thisDetail.setAttribute("rows", 5);
+            thisDetail.value = BugData[element];
             bugContainerDisplayMain.appendChild(thisDetail);
         }
 
@@ -132,8 +184,15 @@ function updateDetails() {
             bugContainerDisplaySideOthers.appendChild(thisDetail);
         }
     }
+
+    let bugSubmitButton = document.createElement("button");
+    bugSubmitButton.innerText = "Save Changes";
+    bugSubmitButton.className = "js_bug_update bugUpdateButton btn btn-primary";
+    bugSubmitButton.addEventListener("click", function () { updateBug(bugContainerDisplay) });
+
     bugContainerDisplaySideColumn.appendChild(bugContainerDisplaySideStatus);
     bugContainerDisplaySideColumn.appendChild(bugContainerDisplaySideOthers);
+    bugContainerDisplaySideColumn.appendChild(bugSubmitButton);
     bugContainerDisplay.appendChild(bugContainerDisplayMain);
     bugContainerDisplay.appendChild(bugContainerDisplaySideColumn);
 
@@ -152,6 +211,10 @@ function loadAPI() {
             console.log("Data Received!");
             BugData = JSON.parse(DataRequest.responseText);
             console.log(BugData);
+
+            if (BugData["message"] != null){
+                swapToSearch();
+            }
             updateDetails();
         }
 

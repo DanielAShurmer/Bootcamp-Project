@@ -99,3 +99,16 @@ body {
   padding: 10px;
   margin: 5px;
 }
+
+.bugContainerDescriptionInput {
+  min-width: 100%;
+}
+
+.bugUpdateButton {
+  width: 100%;
+  padding: 10px;
+  margin: 5px;
+  background-color: rgb(202, 227, 248);
+  border: 2px solid rgb(248, 249, 250);
+  color: rgb(0, 0, 0);
+}
