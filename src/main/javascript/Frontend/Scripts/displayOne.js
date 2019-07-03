@@ -1,6 +1,7 @@
 let BugData = {};
 const BUGSTATUSOPTIONS = ["Open", "Closed", "Being Worked On", "Reopened"];
-const TAGLIST = ["User Interface", "AI", "Graphical", "Crashes Program", "Ability"];
+const PRIORITYOPTIONS = ["Low","Medium","High","Critical"];
+const TAGLIST = ["-","User Interface", "AI", "Graphical", "Crashes Program", "Ability"];
 
 function swapToSearch() {
     window.location = "Search.html";
@@ -200,28 +201,82 @@ function updateDetails() {
         if (element == "priority") {
             let thisDetail = document.createElement("p");
             thisDetail.className = "bugContainerPriority";
-            thisDetail.innerText = "Priority: \n" + BugData[element];
+            thisDetail.innerText = "Priority:";
+            bugContainerDisplaySideOthers.appendChild(thisDetail);
+
+            thisDetail = document.createElement("select");
+            thisDetail.className = "bugContainerPriorityDropdown";
+
+            for (priority in PRIORITYOPTIONS) {
+                let thisPriority = document.createElement("option");
+                thisPriority.innerText = PRIORITYOPTIONS[priority];
+
+                if (PRIORITYOPTIONS[priority] == BugData[element]) {
+                    thisPriority.setAttribute("selected","selected");
+                }
+
+                thisDetail.appendChild(thisPriority);
+            }
+
             bugContainerDisplaySideOthers.appendChild(thisDetail);
         }
 
         if (element == "tagOne") {
             let thisDetail = document.createElement("p");
             thisDetail.className = "bugContainerTagOne";
-            thisDetail.innerText = "Tags: \n" + BugData[element];
+            thisDetail.innerText = "Tags: \n";
+            bugContainerDisplaySideOthers.appendChild(thisDetail);
+
+            thisDetail = document.createElement("select");
+            thisDetail.className = "bugContainerTagDropdown";
+
+            for (tag in TAGLIST) {
+                let thisTag = document.createElement("option");
+                thisTag.innerText = TAGLIST[tag];
+
+                if (TAGLIST[tag] == BugData[element]) {
+                    thisTag.setAttribute("selected","selected");
+                }
+
+                thisDetail.appendChild(thisTag);
+            }
+
             bugContainerDisplaySideOthers.appendChild(thisDetail);
         }
 
         if (element == "tagTwo") {
-            let thisDetail = document.createElement("p");
-            thisDetail.className = "bugContainerTagTwo";
-            thisDetail.innerText = BugData[element];
+            thisDetail = document.createElement("select");
+            thisDetail.className = "bugContainerTagDropdown";
+
+            for (tag in TAGLIST) {
+                let thisTag = document.createElement("option");
+                thisTag.innerText = TAGLIST[tag];
+
+                if (TAGLIST[tag] == BugData[element]) {
+                    thisTag.setAttribute("selected","selected");
+                }
+
+                thisDetail.appendChild(thisTag);
+            }
+
             bugContainerDisplaySideOthers.appendChild(thisDetail);
         }
 
         if (element == "tagThree") {
-            let thisDetail = document.createElement("p");
-            thisDetail.className = "bugContainerTagThree";
-            thisDetail.innerText = BugData[element];
+            thisDetail = document.createElement("select");
+            thisDetail.className = "bugContainerTagDropdown";
+
+            for (tag in TAGLIST) {
+                let thisTag = document.createElement("option");
+                thisTag.innerText = TAGLIST[tag];
+
+                if (TAGLIST[tag] == BugData[element]) {
+                    thisTag.setAttribute("selected","selected");
+                }
+
+                thisDetail.appendChild(thisTag);
+            }
+
             bugContainerDisplaySideOthers.appendChild(thisDetail);
         }
     }

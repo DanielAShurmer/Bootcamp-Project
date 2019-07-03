@@ -116,3 +116,7 @@ body {
   border: 2px solid rgb(248, 249, 250);
   color: rgb(0, 0, 0);
 }
+
+.bugContainerTagDropdown {
+  width: 100%;
+}
