@@ -48,31 +48,29 @@
 
                         <div class="form-group">
                             <p>Tag:</p>
-                            <input type="text" name="js_form_tag" class="filterInput">
+                            <select class="filterInput" id="js_form_tag">
+                                <option></option>
+                            </select>
                         </div>
 
                         <div class="form-group">
                             <p>Status:</p>
-                            <input type="text" name="js_form_status" class="filterInput">
+                            <select class="filterInput" id="js_form_status">
+                                <option></option>
+                            </select>
                         </div>
-
                         <button class="btn btn-dark filterButton">Filter</button>
-
-
                     </form>
                 </div>
             </div>
 
             <div class="mainBody col">
-
                 <h1>Search Bugs</h1>
                 <div id="js_bug_details"></div>
-
             </div>
 
         </div>
     </div>
-
 
     <script src="Scripts/search.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

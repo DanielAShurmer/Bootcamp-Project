@@ -1,5 +1,7 @@
 let BugData = {};
 let FilteredData = [];
+const TAGLIST = ['User Interface','AI','Graphical','Crashes Program','Ability'];
+const BUGSTATUSOPTIONS = ["Open", "Closed", "Being Worked On", "Reopened"];
 
 function swapToSearch() {
     window.location = "Search.html";
@@ -72,6 +74,21 @@ function goToBugWithID(bugID) {
     sessionStorage.setItem("IDToLoad", bugID);
     window.location = "DisplayOne.html";
     console.log("Loading Data Of Bug With Identifier " + bugID);
+}
+
+function populateDropdowns() {
+    for (let tag in TAGLIST) {
+        tag = TAGLIST[tag];
+        let thisTag = document.createElement("option");
+        thisTag.text = tag;
+        document.getElementById("js_form_tag").add(thisTag);
+    }
+    for (let status in BUGSTATUSOPTIONS) {
+        status = BUGSTATUSOPTIONS[status];
+        let thisStatus = document.createElement("option");
+        thisStatus.text = status;
+        document.getElementById("js_form_status").add(thisStatus);
+    }
 }
 
 function updateDetails(inputBugs) {
@@ -157,6 +174,7 @@ function loadAPI() {
         console.log("Data Received!");
         BugData = JSON.parse(DataRequest.responseText);
         console.log(BugData);
+        populateDropdowns();
         updateDetails(BugData);
     }
 
