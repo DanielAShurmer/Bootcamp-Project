@@ -2,6 +2,7 @@ let BugData = {};
 let FilteredData = [];
 const TAGLIST = ['User Interface','AI','Graphical','Crashes Program','Ability'];
 const BUGSTATUSOPTIONS = ["Open", "Closed", "Being Worked On", "Reopened"];
+const PRIORITYOPTIONS = ["Low", "Medium", "High", "Critical"];
 
 function swapToSearch() {
     window.location = "Search.html";
@@ -47,6 +48,9 @@ function runSearch(formData) {
     if (formData[2].value != "") {
         FilteredData = filter(FilteredData, "status", cleanString((formData[2].value).toLowerCase()));
     }
+    if (formData[3].value != "") {
+        FilteredData = filter(FilteredData, "priority", cleanString((formData[3].value).toLowerCase()));
+    }
     updateDetails(FilteredData);
 
     return false; 
@@ -88,6 +92,12 @@ function populateDropdowns() {
         let thisStatus = document.createElement("option");
         thisStatus.text = status;
         document.getElementById("js_form_status").add(thisStatus);
+    }
+    for (let priority in PRIORITYOPTIONS) {
+        priority = PRIORITYOPTIONS[priority];
+        let thisPriority = document.createElement("option");
+        thisPriority.text = priority;
+        document.getElementById("js_form_priority").add(thisPriority);
     }
 }
 
