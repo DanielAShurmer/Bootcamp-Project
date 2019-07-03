@@ -8,8 +8,8 @@ function swapToAddNew() {
     window.location = "AddNew.html";
 }
 
-function swapToInfo() {
-    window.location = "displayAll.html";
+function swapToSiteInfo() {
+    window.location = "SiteInfo.html";
 }
 
 function cleanString(inputString) {
