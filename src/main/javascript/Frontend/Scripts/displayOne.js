@@ -1,7 +1,7 @@
 let BugData = {};
 const BUGSTATUSOPTIONS = ["Open", "Closed", "Being Worked On", "Reopened"];
-const PRIORITYOPTIONS = ["Low","Medium","High","Critical"];
-const TAGLIST = ["-","User Interface", "AI", "Graphical", "Crashes Program", "Ability"];
+const PRIORITYOPTIONS = ["Low", "Medium", "High", "Critical"];
+const TAGLIST = ["-", "User Interface", "AI", "Graphical", "Crashes Program", "Ability"];
 
 function swapToSearch() {
     window.location = "Search.html";
@@ -40,11 +40,11 @@ function updateBug(formData) {
     bugToEditDetails["description"] = formData[0].value;
 
     bugToEditDetails["status"] = formData[4].value;
-    bugToEditDetails["priority"] = BugData["priority"];
+    bugToEditDetails["priority"] = formData[5].value;
 
-    bugToEditDetails["tagOne"] = BugData["tagOne"];
-    bugToEditDetails["tagTwo"] = BugData["tagTwo"];
-    bugToEditDetails["tagThree"] = BugData["tagThree"];
+    bugToEditDetails["tagOne"] = formData[6].value;
+    bugToEditDetails["tagTwo"] = formData[7].value;
+    bugToEditDetails["tagThree"] = formData[8].value;
 
     bugToEditDetails["image"] = formData[1].value;
 
@@ -123,11 +123,18 @@ function updateDetails() {
             thisDetail.innerText = "Image:";
             bugContainerDisplayMain.appendChild(thisDetail);
 
-            thisDetail = document.createElement("img");
-            thisDetail.className = "bugContainerImageDisplay";
-            thisDetail.setAttribute("src", BugData[element]);
-            thisDetail.setAttribute("alt", "Image Display Here");
-            bugContainerDisplayMain.appendChild(thisDetail);
+            if (BugData[element] != null && BugData[element] != "" && BugData[element] != "-") {
+                thisDetail = document.createElement("img");
+                thisDetail.className = "bugContainerImageDisplay";
+                thisDetail.setAttribute("src", BugData[element]);
+                thisDetail.setAttribute("alt", "Bug Image Is Displayed Here");
+                bugContainerDisplayMain.appendChild(thisDetail);
+            }
+            else {
+                let thisDetail = document.createElement("p");
+                thisDetail.innerText = "No Image Link Present For This Bug";
+                bugContainerDisplayMain.appendChild(thisDetail);
+            }
 
             thisDetail = document.createElement("input");
             thisDetail.className = "bugContainerImageLinkInput";
@@ -195,7 +202,7 @@ function updateDetails() {
                 thisStatus.innerText = BUGSTATUSOPTIONS[status];
 
                 if (BUGSTATUSOPTIONS[status] == BugData[element]) {
-                    thisStatus.setAttribute("selected","selected");
+                    thisStatus.setAttribute("selected", "selected");
                 }
 
                 thisDetail.appendChild(thisStatus);
@@ -218,7 +225,7 @@ function updateDetails() {
                 thisPriority.innerText = PRIORITYOPTIONS[priority];
 
                 if (PRIORITYOPTIONS[priority] == BugData[element]) {
-                    thisPriority.setAttribute("selected","selected");
+                    thisPriority.setAttribute("selected", "selected");
                 }
 
                 thisDetail.appendChild(thisPriority);
@@ -241,7 +248,7 @@ function updateDetails() {
                 thisTag.innerText = TAGLIST[tag];
 
                 if (TAGLIST[tag] == BugData[element]) {
-                    thisTag.setAttribute("selected","selected");
+                    thisTag.setAttribute("selected", "selected");
                 }
 
                 thisDetail.appendChild(thisTag);
@@ -259,7 +266,7 @@ function updateDetails() {
                 thisTag.innerText = TAGLIST[tag];
 
                 if (TAGLIST[tag] == BugData[element]) {
-                    thisTag.setAttribute("selected","selected");
+                    thisTag.setAttribute("selected", "selected");
                 }
 
                 thisDetail.appendChild(thisTag);
@@ -277,7 +284,7 @@ function updateDetails() {
                 thisTag.innerText = TAGLIST[tag];
 
                 if (TAGLIST[tag] == BugData[element]) {
-                    thisTag.setAttribute("selected","selected");
+                    thisTag.setAttribute("selected", "selected");
                 }
 
                 thisDetail.appendChild(thisTag);
