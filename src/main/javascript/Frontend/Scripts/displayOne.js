@@ -123,6 +123,12 @@ function updateDetails() {
             thisDetail.innerText = "Image:";
             bugContainerDisplayMain.appendChild(thisDetail);
 
+            thisDetail = document.createElement("img");
+            thisDetail.className = "bugContainerImageDisplay";
+            thisDetail.setAttribute("src", BugData[element]);
+            thisDetail.setAttribute("alt", "Image Display Here");
+            bugContainerDisplayMain.appendChild(thisDetail);
+
             thisDetail = document.createElement("input");
             thisDetail.className = "bugContainerImageLinkInput";
             thisDetail.setAttribute("type", "text");
