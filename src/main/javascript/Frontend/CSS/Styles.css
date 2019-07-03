@@ -100,8 +100,12 @@ body {
   margin: 5px;
 }
 
-.bugContainerDescriptionInput {
+.updateTextarea {
   min-width: 100%;
+}
+
+.bugContainerImageLinkInput {
+  width: 100%;
 }
 
 .bugUpdateButton {

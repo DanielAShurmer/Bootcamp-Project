@@ -43,10 +43,10 @@ function updateBug(formData) {
     bugToEditDetails["tagTwo"] = BugData["tagTwo"];
     bugToEditDetails["tagThree"] = BugData["tagThree"];
 
-    bugToEditDetails["image"] = BugData["image"];
+    bugToEditDetails["image"] = formData[1].value;
 
-    bugToEditDetails["closeReason"] = BugData["closeReason"];
-    bugToEditDetails["openReason"] = BugData["openReason"];
+    bugToEditDetails["closeReason"] = formData[2].value;
+    bugToEditDetails["openReason"] = formData[3].value;
     bugToEditDetails["__v"] = BugData["__v"];
 
     console.log(bugToEditDetails);
@@ -108,7 +108,7 @@ function updateDetails() {
             bugContainerDisplayMain.appendChild(thisDetail);
 
             thisDetail = document.createElement("textarea");
-            thisDetail.className = "bugContainerDescriptionInput";
+            thisDetail.className = "bugContainerDescriptionInput updateTextarea";
             thisDetail.setAttribute("rows", 5);
             thisDetail.value = BugData[element];
             bugContainerDisplayMain.appendChild(thisDetail);
@@ -117,21 +117,39 @@ function updateDetails() {
         if (element == "image") {
             let thisDetail = document.createElement("p");
             thisDetail.className = "bugContainerImage";
-            thisDetail.innerText = "Image: \n" + BugData[element];
+            thisDetail.innerText = "Image:";
+            bugContainerDisplayMain.appendChild(thisDetail);
+
+            thisDetail = document.createElement("input");
+            thisDetail.className = "bugContainerImageLinkInput";
+            thisDetail.setAttribute("type", "text");
+            thisDetail.value = BugData[element];
             bugContainerDisplayMain.appendChild(thisDetail);
         }
 
         if (element == "closeReason") {
             let thisDetail = document.createElement("p");
             thisDetail.className = "bugContainerCloseReason";
-            thisDetail.innerText = "Reason For Closing: \n" + BugData[element];
+            thisDetail.innerText = "Reason For Closing:";
+            bugContainerDisplayMain.appendChild(thisDetail);
+
+            thisDetail = document.createElement("textarea");
+            thisDetail.className = "bugContainerCloseReasonInput updateTextarea";
+            thisDetail.setAttribute("rows", 3);
+            thisDetail.value = BugData[element];
             bugContainerDisplayMain.appendChild(thisDetail);
         }
 
         if (element == "openReason") {
             let thisDetail = document.createElement("p");
             thisDetail.className = "bugContainerOpenReason";
-            thisDetail.innerText = "Reason For Reopening: \n" + BugData[element];
+            thisDetail.innerText = "Reason For Reopening:";
+            bugContainerDisplayMain.appendChild(thisDetail);
+
+            thisDetail = document.createElement("textarea");
+            thisDetail.className = "bugContainerOpenReasonInput updateTextarea";
+            thisDetail.setAttribute("rows", 3);
+            thisDetail.value = BugData[element];
             bugContainerDisplayMain.appendChild(thisDetail);
         }
 
