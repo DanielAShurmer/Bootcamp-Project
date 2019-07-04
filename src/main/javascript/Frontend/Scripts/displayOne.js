@@ -54,26 +54,26 @@ function updateBug(formData) {
 
     console.log(bugToEditDetails);
 
-    const DeleteDataRequest = new XMLHttpRequest();
+    const InputDataRequest = new XMLHttpRequest();
 
-    DeleteDataRequest.onloadend = function () {
+    InputDataRequest.onloadend = function () {
 
-        const InputDataRequest = new XMLHttpRequest();
+        const DeleteDataRequest = new XMLHttpRequest();
 
-        InputDataRequest.onloadend = function () {
+        DeleteDataRequest.onloadend = function () {
             console.log("Bug Report Successfully Readded!");
             swapToSearch();
         }
 
-        InputDataRequest.open("POST", "http://localhost:3000/bugs");
-        InputDataRequest.setRequestHeader("Content-Type", "application/json");
-        InputDataRequest.send(JSON.stringify(bugToEditDetails));
+        DeleteDataRequest.open("DELETE", "http://localhost:3000/bugs/" + BugData["_id"]);
+        DeleteDataRequest.send();
 
         console.log("Bug Report Successfully Deleted!");
     }
 
-    DeleteDataRequest.open("DELETE", "http://localhost:3000/bugs/" + BugData["_id"]);
-    DeleteDataRequest.send();
+    InputDataRequest.open("POST", "http://localhost:3000/bugs");  
+    InputDataRequest.setRequestHeader("Content-Type", "application/json");
+    InputDataRequest.send(JSON.stringify(bugToEditDetails));     
 
     return true;
 }

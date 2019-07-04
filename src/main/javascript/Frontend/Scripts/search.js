@@ -1,6 +1,6 @@
 let BugData = {};
 let FilteredData = [];
-const TAGLIST = ['User Interface','AI','Graphical','Crashes Program','Ability'];
+const TAGLIST = ['User Interface', 'AI', 'Graphical', 'Crashes Program', 'Ability'];
 const BUGSTATUSOPTIONS = ["Open", "Closed", "Being Worked On", "Reopened"];
 const PRIORITYOPTIONS = ["Low", "Medium", "High", "Critical"];
 
@@ -35,9 +35,9 @@ function runSearch(formData) {
         FilteredData = filter(FilteredData, "bugNumber", formData[0].value);
     }
     if (formData[1].value != "") {
-        let TagOneList = filter(FilteredData, "tagOne", cleanString((formData[1].value).toLowerCase()));
-        let TagTwoList = filter(FilteredData, "tagTwo", cleanString((formData[1].value).toLowerCase()));
-        let TagThreeList = filter(FilteredData, "tagThree", cleanString((formData[1].value).toLowerCase()));
+        let TagOneList = filter(FilteredData, "tagOne", formData[1].value);
+        let TagTwoList = filter(FilteredData, "tagTwo", formData[1].value);
+        let TagThreeList = filter(FilteredData, "tagThree", formData[1].value);
 
         FilteredData = [];
         for (let match in TagOneList) { FilteredData[FilteredData.length] = TagOneList[match]; }
@@ -46,14 +46,14 @@ function runSearch(formData) {
 
     }
     if (formData[2].value != "") {
-        FilteredData = filter(FilteredData, "status", cleanString((formData[2].value).toLowerCase()));
+        FilteredData = filter(FilteredData, "status", formData[2].value);
     }
     if (formData[3].value != "") {
-        FilteredData = filter(FilteredData, "priority", cleanString((formData[3].value).toLowerCase()));
+        FilteredData = filter(FilteredData, "priority", formData[3].value);
     }
     updateDetails(FilteredData);
 
-    return false; 
+    return false;
 }
 
 function cleanString(inputString) {
@@ -77,7 +77,6 @@ function goToBugWithID(bugID) {
     sessionStorage.removeItem("IDToLoad");
     sessionStorage.setItem("IDToLoad", bugID);
     window.location = "DisplayOne.html";
-    console.log("Loading Data Of Bug With Identifier " + bugID);
 }
 
 function populateDropdowns() {
@@ -115,12 +114,18 @@ function updateDetails(inputBugs) {
     let bugListing = document.createElement("div");
     bugListing.id = "bugListing";
 
+    if (inputBugs.length == 0) {
+        let thisDetail = document.createElement("p");
+        thisDetail.innerText = "No Bugs Match The Current Search";
+        bugListing.appendChild(thisDetail);
+    }
+
     for (let data in inputBugs) {
         let ThisBug = inputBugs[data];
 
         let bugContainer = document.createElement("button");
         bugContainer.className = "searchBugContainer container";
-        
+
         let bugContainerDisplay = document.createElement("div");
         bugContainerDisplay.className = "bugContainerDisplay row";
 
@@ -173,8 +178,8 @@ function updateDetails(inputBugs) {
         bugContainer.addEventListener("click", function () { goToBugWithID(ThisBug["_id"]) });
         bugContainer.appendChild(bugContainerDisplay);
         bugListing.appendChild(bugContainer);
-        document.getElementById("js_bug_details").appendChild(bugListing);
     }
+    document.getElementById("js_bug_details").appendChild(bugListing);
 }
 
 function loadAPI() {
