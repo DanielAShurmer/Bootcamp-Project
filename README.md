@@ -41,7 +41,7 @@ This page cannot be reached via any other page, and exists for debugging purpose
 Each bug report contains the following data:
 * \_id - Randomly generated IDs used by the database to store and find reports.
 
-* Bug Number - Randomly generated IDs for each bug. These range from 1 to 99999 and are more easily readable than \_id, while still uniquely identifing each report.
+* Bug Number - Randomly generated IDs for each bug. These range from 1 to 100000 and are more easily readable than \_id, while still uniquely identifing each report.
 
 * Description - A plaintext description of the bug.
 
