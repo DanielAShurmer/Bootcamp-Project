@@ -1,0 +1,150 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(202, 227, 248);
+    color: rgb(36, 36, 36);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding: 10px 50px;
+}
+
+.bugContainer {
+  background-color: rgb(208, 209, 210);
+}
+
+.navbar-button {
+  background-color: rgb(208, 209, 210);
+  margin: 5px 5px;
+}
+
+.pageBody {
+  padding: 60px 0px 0px 0px;
+}
+
+.pageTitle {
+  font-size: 30px;
+}
+
+.searchPanel {
+  background-color: rgb(208, 209, 210);
+  margin: -5px 0px -10px;
+  min-height: 100vh;
+}
+
+.searchContainer {
+  position: fixed;
+}
+
+.searchBugContainer {
+  background-color: rgb(208, 209, 210);
+  border: 2px solid rgb(248, 249, 250);
+  width: 100%;
+  margin: 10px 0px;
+  border-radius: 12px;
+}
+
+.bugContainerDisplayNumAndDesc {
+  min-width: 70%;
+}
+
+.bugContainerDisplayStat {
+  height: 100%;
+  border: 2px solid rgb(248, 249, 250);
+  border-radius: 12px;
+  padding: 10px;
+  margin: 5px;
+}
+
+.bugContainerStatus {
+  font-size: 1.25em;
+}
+
+.filterInput {
+  width: 100%;
+}
+
+.searchContainer {
+  max-width: 165px;
+}
+
+.searchPanel {
+  max-width: 200px;
+}
+
+.filterButton {
+  width: 100%;
+}
+
+.singleBugContainerDisplay {
+  background-color: rgb(208, 209, 210);
+  border: 2px solid rgb(248, 249, 250);
+}
+
+.singleBugContainerDisplaySideStatus {
+  min-height: 15%;
+  border: 2px solid rgb(248, 249, 250);
+  border-radius: 12px;
+  padding: 10px;
+  margin: 5px;
+  text-align: center;
+  font-size: 160%;
+}
+
+.singleBugContainerDisplaySideOthers {
+  min-height: 50%;
+  background-color: rgb(182, 182, 182);
+  border: 2px solid rgb(248, 249, 250);
+  text-align: right;
+  padding: 10px;
+  margin: 5px;
+}
+
+.updateTextarea {
+  min-width: 100%;
+}
+
+.bugContainerImageLinkInput {
+  width: 100%;
+}
+
+.bugUpdateButton {
+  width: 100%;
+  padding: 10px;
+  margin: 5px;
+  background-color: rgb(202, 227, 248);
+  border: 2px solid rgb(248, 249, 250);
+  color: rgb(0, 0, 0);
+}
+
+.bugUpdateButton:hover {
+  width: 100%;
+  padding: 10px;
+  margin: 5px;
+  background-color: rgb(157, 189, 216);
+  border: 2px solid rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+
+.bugContainerTagDropdown {
+  width: 100%;
+}
+
+.bugContainerImageDisplay {
+  max-width: 100%;
+  max-height: 200px;
+  padding: 0px 5px 10px;
+}
+
+.siteInfoContainer {
+  background-color: rgb(208, 209, 210);
+  border: 2px solid rgb(248, 249, 250);
+  width: 100%;
+  margin: 10px 0px;
+  border-radius: 12px;
+}
+
+.siteInfoText {
+  padding: 5px 10px;
+  font-size: 2vw;
+}
