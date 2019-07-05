@@ -1,6 +1,6 @@
 let bugIDNumber = 0;
 let BugData = [];
-const TAGLIST = ['User Interface','AI','Graphical','Crashes Program','Ability'];
+const TAGLIST = ['User Interface', 'AI', 'Graphical', 'Crashes Program', 'Ability'];
 
 function swapToSearch() {
     window.location = "Search.html";
@@ -37,16 +37,17 @@ function generateNewBugID() {
     while (validIDFound == false) {
         proposedNewID = Math.floor(Math.random() * 100000);
         validIDFound = true;
-        console.log("Unique ID Generation Attempt " + uniqueIDGenerationAttempt + " | Attempting The New ID " + proposedNewID);
+        console.log("Unique ID Generation Attempt " + uniqueIDGenerationAttempt +
+            " | Attempting The New ID " + proposedNewID);
 
         for (let SingleBugReport in BugData) {
             SingleBugReport = BugData[SingleBugReport];
-            if (SingleBugReport["bugNumber"] == proposedNewID){
+            if (SingleBugReport["bugNumber"] == proposedNewID) {
                 validIDFound = false;
             }
         }
         uniqueIDGenerationAttempt++;
-        if (uniqueIDGenerationAttempt == 10000) {break};
+        if (uniqueIDGenerationAttempt == 10000) { break };
     }
 
     if (validIDFound == true) {
